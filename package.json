@@ -5,12 +5,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "turbo run build --parallel "
+    "build": "turbo run build",
+    "test": "turbo run test"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "turbo": "^1.6.3"
+    "turbo": "^1.6.3",
+    "vitest": "^0.25.2"
   }
 }

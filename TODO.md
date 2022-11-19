@@ -1,4 +1,4 @@
-- [ ] `turbo` + `pnpm` + `monorepo` + `ts` + `vite` 搭建框架框
+- [x] `turbo` + `pnpm` + `monorepo` + `ts` + `vite` 搭建框架框
 - [ ] 使用 [vitest](https://cn.vitest.dev/) 单元测试框架， 使用 TDD
 - [ ] 第一个轮子`Promise`的测试用例
 - [ ] 手写第一个轮子 `Promise`
