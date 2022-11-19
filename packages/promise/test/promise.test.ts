@@ -1,4 +1,7 @@
+// https://promisesaplus.com/
+// https://juejin.cn/post/7001775082339041288
 import { expect, test } from 'vitest';
+import { MyPromise } from '../index';
 
 test('Promise', async () => {
   const res = await Promise.resolve(1);
@@ -8,7 +11,7 @@ test('Promise', async () => {
 test('Promise execute fun immediate execution', async () => {
   let immediate = false;
 
-  new Promise(() => {
+  new MyPromise(() => {
     immediate = true;
   });
 
@@ -18,7 +21,7 @@ test('Promise execute fun immediate execution', async () => {
 test('Promise execute fun immediate execution', async () => {
   let immediate = false;
 
-  new Promise(resolve => {
+  new MyPromise(resolve => {
     resolve(1);
   }).then(() => {
     immediate = true;
