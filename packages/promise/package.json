@@ -1,0 +1,14 @@
+{
+  "name": "promise",
+  "version": "0.0.0",
+  "main": "./index.ts",
+  "types": "./index.ts",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc"
+  },
+  "dependencies": {
+    "tsconfig": "workspace:^0.0.0",
+    "typescript": "^4.9.3"
+  }
+}
