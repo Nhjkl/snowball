@@ -3,6 +3,7 @@
   "exclude": ["node_modules"],
   "compilerOptions": {
     "isolatedModules": false,
-    "target": "ESNext"
+    "target": "ESNext",
+    "strictNullChecks": false
   }
 }
