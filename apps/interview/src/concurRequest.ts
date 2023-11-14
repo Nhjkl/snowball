@@ -22,19 +22,22 @@ export function concurReqeust(urls: string[], maxNum: number) {
       const url = urls[index];
       index++;
       try {
-        console.log(`url >> start`, url);
         const res = await fetch(url);
-        results[i] = res;
+        if (res.status === 200) {
+          results[i] = {
+            status: res.status,
+            data: await res.json(),
+          };
+        } else {
+          results[i] = {
+            status: res.status,
+          };
+        }
       } catch (e) {
         results[i] = e;
       } finally {
         count++;
-        console.log(`url >> end`, url);
         if (count === urls.length) {
-          console.log(
-            `results >>`,
-            results.map((res) => (res ? res.status : res)),
-          );
           resolve(results);
         }
         request();
@@ -46,12 +49,4 @@ export function concurReqeust(urls: string[], maxNum: number) {
       request();
     }
   });
-}
-
-{
-  const urls = [];
-  for (let i = 0; i < 10; i++) {
-    urls.push(`https://jsonplaceholder.typicode.com/todos/${i}`);
-  }
-  concurReqeust(urls, 3);
 }

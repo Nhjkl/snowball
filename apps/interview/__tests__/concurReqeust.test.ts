@@ -1,6 +1,15 @@
-import { add } from '@snowball/utils';
 import { expect, test } from 'vitest';
+import { concurReqeust } from '../src/concurRequest';
 
-test('adds 1 + 2 to equal 3', () => {
-  expect(add(1, 2)).toBe(3);
+test('concurReqeust returns correct length', async () => {
+  const urls = [];
+  for (let i = 0; i < 2; i++) {
+    urls.push(`https://jsonplaceholder.typicode.com/todos/${i}`);
+  }
+  const res = await concurReqeust(urls, 3);
+  res.map((item) => {
+    console.log(`item >>`, item);
+    return item;
+  });
+  expect(res.length).toBe(2);
 });
