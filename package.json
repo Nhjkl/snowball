@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "prepare": "husky install",
     "__eslit__comment__": "查阅eslint文档 https://eslint.org/docs/latest/use/command-line-interface 了解cli工具的options",
     "lint": "eslint ./ --ext .ts,.js,.json --max-warnings=0",
     "format": "prettier --config .prettierrc '.' --write",
@@ -20,6 +21,7 @@
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.1",
     "esno": "^4.0.0",
+    "husky": "^8.0.3",
     "onchange": "^7.1.0",
     "prettier": "^3.1.0",
     "typescript": "^5.2.2"
