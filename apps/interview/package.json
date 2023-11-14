@@ -5,10 +5,15 @@
   "license": "MIT",
   "author": "Sean Liu",
   "scripts": {
-    "debug": "esno ./src/index.ts"
+    "debug": "esno ./src/concurRequest.ts"
   },
   "dependencies": {
     "@snowball/tsconfig": "workspace:^",
-    "@snowball/utils": "workspace:^"
+    "@snowball/utils": "workspace:^",
+    "@types/node-fetch": "^2.6.9",
+    "node-fetch": "^3.3.2"
+  },
+  "devDependencies": {
+    "vitest": "^0.34.6"
   }
 }
