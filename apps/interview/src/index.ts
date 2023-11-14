@@ -1,4 +1,4 @@
-import { add } from "@snowball/utils";
+import { add } from '@snowball/utils';
 
 function main() {
   const result = add(1, 2);
