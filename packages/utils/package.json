@@ -1,0 +1,9 @@
+{
+  "name": "@snowball/utils",
+  "version": "0.0.0",
+  "private": true,
+  "license": "MIT",
+  "author": "Sean Liu",
+  "description": "local utils package",
+  "main": "./src/index.ts"
+}

@@ -1,0 +1,22 @@
+{
+  "name": "snowball",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "__eslit__comment__": "查阅eslint文档 https://eslint.org/docs/latest/use/command-line-interface 了解cli工具的options",
+    "lint": "eslint ./ --ext .ts,.js,.json --max-warnings=0"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.9.0",
+    "@typescript-eslint/eslint-plugin": "^6.11.0",
+    "@typescript-eslint/parser": "^6.11.0",
+    "eslint": "^8.53.0",
+    "esno": "^4.0.0",
+    "prettier": "^3.1.0",
+    "typescript": "^5.2.2"
+  }
+}
