@@ -1,0 +1,11 @@
+{
+  "name": "@snowball/algorithm",
+  "version": "0.0.0",
+  "private": true,
+  "license": "MIT",
+  "author": "Sean Liu",
+  "devDependencies": {
+    "@snowball/tsconfig": "workspace:^",
+    "vitest": "^0.34.6"
+  }
+}

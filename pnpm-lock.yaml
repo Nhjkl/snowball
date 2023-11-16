@@ -57,6 +57,15 @@ importers:
         specifier: ^5.2.2
         version: 5.2.2
 
+  apps/algorithm:
+    devDependencies:
+      '@snowball/tsconfig':
+        specifier: workspace:^
+        version: link:../../packages/tsconfig
+      vitest:
+        specifier: ^0.34.6
+        version: 0.34.6
+
   apps/interview:
     dependencies:
       '@snowball/tsconfig':
