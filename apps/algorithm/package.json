@@ -4,8 +4,13 @@
   "private": true,
   "license": "MIT",
   "author": "Sean Liu",
+  "scripts": {
+    "test": "vitest",
+    "test:ui": "vitest --ui"
+  },
   "devDependencies": {
     "@snowball/tsconfig": "workspace:^",
+    "@vitest/ui": "^0.34.6",
     "vitest": "^0.34.6"
   }
 }
