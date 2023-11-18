@@ -1,3 +1,6 @@
 {
-  "extends": "@snowball/tsconfig/tsconfig.base.json"
+  "extends": "@snowball/tsconfig/tsconfig.base.json",
+  "compilerOptions": {
+    "downlevelIteration": true
+  }
 }
