@@ -1,4 +1,4 @@
-import { writeFile, githubRequest } from '@snowball/utils';
+import { writeFile, githubRequest, isExist } from '@snowball/utils';
 
 /**
  * 获取题目列表
@@ -22,13 +22,17 @@ async function getQuestionFile(name: string = '00004-easy-pick') {
   const templateFile = `${baseUrl}/${name}/template.ts`;
   const testCasesFile = `${baseUrl}/${name}/test-cases.ts`;
 
-  const templateRes = await githubRequest(templateFile);
-  const templateBody = await templateRes.text();
-  const testCasesRes = await githubRequest(testCasesFile);
-  const testCasesBody = await testCasesRes.text();
+  if (!isExist(templateFile)) {
+    const templateRes = await githubRequest(templateFile);
+    const templateBody = await templateRes.text();
+    writeFile(`./src/${name}/template.ts`, templateBody);
+  }
 
-  writeFile(`./src/${name}/template.ts`, templateBody);
-  writeFile(`./src/${name}/test-cases.ts`, testCasesBody);
+  if (!isExist(testCasesFile)) {
+    const testCasesRes = await githubRequest(testCasesFile);
+    const testCasesBody = await testCasesRes.text();
+    writeFile(`./src/${name}/test-cases.ts`, testCasesBody);
+  }
 }
 
 // 获取命令行参数

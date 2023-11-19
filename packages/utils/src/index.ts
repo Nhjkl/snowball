@@ -7,13 +7,17 @@ export const add = (a: number, b: number) => {
 };
 
 export function writeFile(filePath: string, content: string) {
-  if (fs.existsSync(filePath)) {
+  if (isExist(filePath)) {
     console.log(`${filePath}文件已存在,不再创建`);
   } else {
     const directory = path.dirname(filePath);
     fs.mkdirSync(directory, { recursive: true });
     fs.writeFileSync(filePath, content);
   }
+}
+
+export function isExist(filePath: string) {
+  return fs.existsSync(filePath);
 }
 
 export function githubRequest(url: string, options?: { method: 'GET' | 'POST' }) {
