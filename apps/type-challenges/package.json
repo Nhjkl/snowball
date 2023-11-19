@@ -1,0 +1,17 @@
+{
+  "name": "@snowball/type-challenges",
+  "version": "0.0.0",
+  "private": true,
+  "license": "MIT",
+  "author": "Sean Liu",
+  "main": "./index.ts",
+  "scripts": {
+    "getQuestions": "esno ./getQuestions.ts",
+    "selector": "./.selector"
+  },
+  "dependencies": {
+    "@snowball/tsconfig": "workspace:^",
+    "@snowball/utils": "workspace:^",
+    "@type-challenges/utils": "^0.1.1"
+  }
+}

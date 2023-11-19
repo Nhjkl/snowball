@@ -1,0 +1,13 @@
+#!/bin/bash
+options=($(cat ./.questions))
+# 读取文件内容并传递给 fzf
+selected_option=$(printf "%s\n" "${options[@]}" | fzf)
+
+if [[ " ${options[@]} " =~ " ${selected_option} " ]]; then
+	//https://github.com/type-challenges/type-challenges/blob/main/questions/00004-easy-pick/README.zh-CN.md
+	$BROWSER https://github.com/type-challenges/type-challenges/blob/main/questions/$selected_option/README.zh-CN.md &
+
+	esno ./getQuestions.ts $selected_option
+else
+	echo "Selected option does not exist in the file: ${selected_option}"
+fi

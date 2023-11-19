@@ -1,21 +1,17 @@
 {
   "compilerOptions": {
-    "composite": true,
-    "incremental": true,
-    // 这几项配置与Typescript的Project References，tsc的--build模式有关，
-
+    "composite": false,
     "declaration": true,
     "declarationMap": true,
-    "emitDeclarationOnly": true,
-    "noEmitOnError": true,
-    "skipLibCheck": true,
-    // 这几项配置（当然还有其他相关配置）与生成js文件、d.ts文件，sourcemap文件有关，
-
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    // 这几项配置与CommonJS和ESModule之间的互操作性有关，
-
-    "resolveJsonModule": true,
+    "forceConsistentCasingInFileNames": true,
+    "inlineSources": false,
+    "isolatedModules": true,
+    "moduleResolution": "node",
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "preserveWatchOutput": true,
+    "skipLibCheck": true,
     "strict": true
   }
 }
