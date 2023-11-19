@@ -1,5 +1,5 @@
 import { test } from 'vitest';
-import { createFetch } from '../src/fetch';
+import { createFetch, loadNovel } from '../src/fetch';
 
 test('fetch abort', async () => {
   const fetch = createFetch(1000);
@@ -9,4 +9,8 @@ test('fetch abort', async () => {
   } catch (error) {
     console.log(`error >>`, error);
   }
+});
+
+test('fetch novel', async () => {
+  await loadNovel();
 });
