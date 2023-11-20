@@ -7,7 +7,12 @@ if [[ " ${options[@]} " =~ " ${selected_option} " ]]; then
 	//https://github.com/type-challenges/type-challenges/blob/main/questions/00004-easy-pick/README.zh-CN.md
 	$BROWSER https://github.com/type-challenges/type-challenges/blob/main/questions/$selected_option/README.zh-CN.md &
 
-	esno ./getQuestions.ts $selected_option
+	# 判断参数是否为空
+	if [ -z "$1" ]; then
+		esno ./getQuestions.ts $selected_option
+	else
+		esno ./getQuestions.ts $selected_option $1
+	fi
 else
 	echo "Selected option does not exist in the file: ${selected_option}"
 fi

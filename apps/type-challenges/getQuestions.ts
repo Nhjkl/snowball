@@ -17,7 +17,7 @@ async function getQuestions() {
  * download 题目文件
  * @param [name='00004-easy-pick']
  */
-async function getQuestionFile(name: string = '00004-easy-pick') {
+async function getQuestionFile(name: string = '00004-easy-pick', outputPath: string = 'src') {
   const baseUrl = 'https://raw.githubusercontent.com/type-challenges/type-challenges/main/questions';
   const templateFile = `${baseUrl}/${name}/template.ts`;
   const testCasesFile = `${baseUrl}/${name}/test-cases.ts`;
@@ -25,13 +25,13 @@ async function getQuestionFile(name: string = '00004-easy-pick') {
   if (!isExist(templateFile)) {
     const templateRes = await githubRequest(templateFile);
     const templateBody = await templateRes.text();
-    writeFile(`./src/${name}/template.ts`, templateBody);
+    writeFile(`./${outputPath}/${name}/template.ts`, templateBody);
   }
 
   if (!isExist(testCasesFile)) {
     const testCasesRes = await githubRequest(testCasesFile);
     const testCasesBody = await testCasesRes.text();
-    writeFile(`./src/${name}/test-cases.ts`, testCasesBody);
+    writeFile(`./${outputPath}/${name}/test-cases.ts`, testCasesBody);
   }
 }
 
@@ -42,6 +42,7 @@ if (args.length) {
   console.log('Command line arguments:', args);
   const name = args[0];
   if (name) {
-    getQuestionFile(name);
+    const outputPath = args[1];
+    getQuestionFile(name, outputPath);
   }
 }
