@@ -65,7 +65,7 @@ N:00734-extreme-inclusive-range
 N:00741-extreme-sort
 N:00847-hard-string-join
 N:00869-extreme-distributeunions
-N:00898-easy-includes
+Y:00898-easy-includes
 N:00925-extreme-assert-array-index
 N:00949-medium-anyof
 N:00956-hard-deeppick
