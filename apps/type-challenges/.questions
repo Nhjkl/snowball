@@ -32,7 +32,7 @@ N:00116-medium-replace
 N:00119-medium-replaceall
 N:00147-hard-c-printf-parser
 N:00151-extreme-query-string-parser
-N:00189-easy-awaited
+Y:00189-easy-awaited
 N:00191-medium-append-argument
 N:00213-hard-vue-basic-props
 N:00216-extreme-slice
