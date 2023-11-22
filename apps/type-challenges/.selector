@@ -3,8 +3,8 @@ options=($(cat ./.questions))
 # 读取文件内容并传递给 fzf
 _selected_option=$(printf "%s\n" "${options[@]}" | fzf)
 
-selected_option="${_selected_option/:/}"
-selected_option="${selected_option/󰱒:/}"
+selected_option="${_selected_option/N:/}"
+selected_option="${selected_option/Y:/}"
 
 if [[ " ${options[@]} " =~ " ${_selected_option} " ]]; then
 	//https://github.com/type-challenges/type-challenges/blob/main/questions/00004-easy-pick/README.zh-CN.md
@@ -20,6 +20,6 @@ else
 	echo "Selected option does not exist in the file: ${selected_option}"
 fi
 
-if [[ $_selected_option == *""* ]]; then
-	sed -i "s/${_selected_option}/󰱒:${selected_option}/g" ./.questions
+if [[ $_selected_option == *"N:"* ]]; then
+	sed -i "s/${_selected_option}/Y:${selected_option}/g" ./.questions
 fi
