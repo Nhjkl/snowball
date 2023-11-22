@@ -98,7 +98,7 @@ N:03188-medium-tuple-to-nested-object
 N:03192-medium-reverse
 N:03196-medium-flip-arguments
 N:03243-medium-flattendepth
-N:03312-easy-parameters
+Y:03312-easy-parameters
 N:03326-medium-bem-style-string
 N:03376-medium-inordertraversal
 N:04037-hard-ispalindrome
