@@ -12,7 +12,7 @@ N:00012-medium-chainable-options
 N:00013-warm-hello-world
 Y:00014-easy-first
 N:00015-medium-last
-N:00016-medium-pop
+Y:00016-medium-pop
 N:00017-hard-currying-1
 Y:00018-easy-tuple-length
 N:00020-medium-promise-all
