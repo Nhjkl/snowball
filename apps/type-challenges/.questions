@@ -1,5 +1,5 @@
 N:00002-medium-return-type
-N:00003-medium-omit
+Y:00003-medium-omit
 Y:00004-easy-pick
 N:00005-extreme-readonly-keys
 N:00006-hard-simple-vue
