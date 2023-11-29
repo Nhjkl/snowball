@@ -23,8 +23,8 @@ N:00059-hard-get-optional
 N:00062-medium-type-lookup
 N:00089-hard-required-keys
 N:00090-hard-optional-keys
-N:00106-medium-trimleft
-N:00108-medium-trim
+Y:00106-medium-trimleft
+Y:00108-medium-trim
 N:00110-medium-capitalize
 N:00112-hard-capitalizewords
 N:00114-hard-camelcase
@@ -110,7 +110,7 @@ Y:04471-medium-zip
 N:04484-medium-istuple
 N:04499-medium-chunk
 N:04518-medium-fill
-N:04803-medium-trim-right
+Y:04803-medium-trim-right
 N:05117-medium-without
 N:05140-medium-trunc
 N:05153-medium-indexof
