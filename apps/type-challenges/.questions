@@ -146,7 +146,7 @@ N:14188-hard-run-length-encoding
 N:15260-hard-tree-path-array
 N:16259-medium-to-primitive
 N:17973-medium-deepmutable
-N:18142-medium-all
+Y:18142-medium-all
 N:18220-medium-filter
 N:19458-hard-snakecase
 N:21104-medium-findall
