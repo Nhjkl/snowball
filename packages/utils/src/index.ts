@@ -20,7 +20,10 @@ export function isExist(filePath: string) {
   return fs.existsSync(filePath);
 }
 
-export function githubRequest(url: string, options?: { method: 'GET' | 'POST' }) {
+export function githubRequest(
+  url: string,
+  options?: { method: 'GET' | 'POST' },
+) {
   return fetch(url, {
     method: options ? options.method : 'GET',
     headers: {

@@ -11,7 +11,10 @@ import { Equal, Expect } from '@type-challenges/utils';
   type test1 = Push<tuple, 4>;
   type test2 = Unshift<tuple, 4>;
 
-  type cases = [Expect<Equal<test1, [1, 2, 3, 4]>>, Expect<Equal<test2, [4, 1, 2, 3]>>];
+  type cases = [
+    Expect<Equal<test1, [1, 2, 3, 4]>>,
+    Expect<Equal<test2, [4, 1, 2, 3]>>,
+  ];
 }
 
 // Zip
@@ -20,13 +23,19 @@ import { Equal, Expect } from '@type-challenges/utils';
   type tuple2 = ['guang', 'dong'];
   type tuple = [[1, 'guang'], [2, 'dong']];
 
-  type Zip<T1 extends [unknown, unknown], T2 extends [unknown, unknown]> = T1 extends [infer a, infer b]
+  type Zip<
+    T1 extends [unknown, unknown],
+    T2 extends [unknown, unknown],
+  > = T1 extends [infer a, infer b]
     ? T2 extends [infer c, infer d]
       ? [[a, c], [b, d]]
       : []
     : [];
 
-  type ZipRecursion<T1 extends unknown[], T2 extends unknown[]> = T1 extends [infer T1First, ...infer T1Ohter]
+  type ZipRecursion<T1 extends unknown[], T2 extends unknown[]> = T1 extends [
+    infer T1First,
+    ...infer T1Ohter,
+  ]
     ? T2 extends [infer T2First, ...infer T2Ohter]
       ? [[T1First, T2First], ...ZipRecursion<T1Ohter, T2Ohter>]
       : []
@@ -35,22 +44,30 @@ import { Equal, Expect } from '@type-challenges/utils';
   type test1 = Zip<tuple1, tuple2>;
   type test2 = ZipRecursion<[1, 2, 3], ['a', 'b', 'c']>;
 
-  type cases = [Expect<Equal<test1, tuple>>, Expect<Equal<test2, [[1, 'a'], [2, 'b'], [3, 'c']]>>];
+  type cases = [
+    Expect<Equal<test1, tuple>>,
+    Expect<Equal<test2, [[1, 'a'], [2, 'b'], [3, 'c']]>>,
+  ];
 }
 
 // 字符串类型的重新构造
 {
-  type CapitalizeStr<Str extends string> = Str extends `${infer First}${infer Rest}`
-    ? `${Uppercase<First>}${Rest}` // TypeScript 提供的内置高级类型 Uppercase 把首字母转为大写
-    : Str;
+  type CapitalizeStr<Str extends string> =
+    Str extends `${infer First}${infer Rest}`
+      ? `${Uppercase<First>}${Rest}` // TypeScript 提供的内置高级类型 Uppercase 把首字母转为大写
+      : Str;
 
   // CamelCase
-  type CamelCase<Str extends string> = Str extends `${infer First}_${infer Right}${infer Rest}`
-    ? `${First}${Uppercase<Right>}${CamelCase<Rest>}`
-    : Str;
+  type CamelCase<Str extends string> =
+    Str extends `${infer First}_${infer Right}${infer Rest}`
+      ? `${First}${Uppercase<Right>}${CamelCase<Rest>}`
+      : Str;
 
   // DropSubStr
-  type DropSubStr<Str extends string, SubStr extends string> = Str extends `${infer Left}${SubStr}${infer Right}`
+  type DropSubStr<
+    Str extends string,
+    SubStr extends string,
+  > = Str extends `${infer Left}${SubStr}${infer Right}`
     ? DropSubStr<`${Left}${Right}`, SubStr>
     : Str;
 
@@ -58,13 +75,19 @@ import { Equal, Expect } from '@type-challenges/utils';
   type test2 = CamelCase<'dong_dong_dong'>;
   type test3 = DropSubStr<'~~~~~duang~~~~~', '~'>;
 
-  type cases = [Expect<Equal<test1, 'Sean'>>, Expect<Equal<test2, 'dongDongDong'>>, Expect<Equal<test3, 'duang'>>];
+  type cases = [
+    Expect<Equal<test1, 'Sean'>>,
+    Expect<Equal<test2, 'dongDongDong'>>,
+    Expect<Equal<test3, 'duang'>>,
+  ];
 }
 
 // 函数类型的重新构造：
 {
   // eslint-disable-next-line @typescript-eslint/ban-types
-  type AppendArgument<Func extends Function, Arg> = Func extends (...args: infer Args) => infer TReturn
+  type AppendArgument<Func extends Function, Arg> = Func extends (
+    ...args: infer Args
+  ) => infer TReturn
     ? (...args: [...Args, Arg]) => TReturn
     : never;
 
@@ -86,7 +109,10 @@ import { Equal, Expect } from '@type-challenges/utils';
   type test1 = Maping<{ a: 1 }>;
   type test2 = UppercaseKey<{ a: 1 }>;
 
-  type cases = [Expect<Equal<test1, { a: [1, 1, 1] }>>, Expect<Equal<test2, { A: 1 }>>];
+  type cases = [
+    Expect<Equal<test1, { a: [1, 1, 1] }>>,
+    Expect<Equal<test2, { A: 1 }>>,
+  ];
 }
 
 // Record
@@ -102,7 +128,10 @@ import { Equal, Expect } from '@type-challenges/utils';
   type test1 = Record<string, number>;
   type test2 = UppercaseKey<{ a: 1 }>;
 
-  type cases = [Expect<Equal<test1, { [k: string]: number }>>, Expect<Equal<test2, { A: 1 }>>];
+  type cases = [
+    Expect<Equal<test1, { [k: string]: number }>>,
+    Expect<Equal<test2, { A: 1 }>>,
+  ];
 }
 
 // ToReadOnly

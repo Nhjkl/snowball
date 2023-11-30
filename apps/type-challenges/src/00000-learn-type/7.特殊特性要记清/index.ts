@@ -13,23 +13,35 @@ import { Equal, Expect } from '@type-challenges/utils';
   type test1 = IsAny<1>;
   type test2 = IsAny<any>;
 
-  type cases = [Expect<Equal<IsAny<1>, false>>, Expect<Equal<IsAny<any>, true>>];
+  type cases = [
+    Expect<Equal<IsAny<1>, false>>,
+    Expect<Equal<IsAny<any>, true>>,
+  ];
 }
 
 {
-  type IsEqual<A, B> = (A extends B ? true : false) & (B extends A ? true : false);
+  type IsEqual<A, B> = (A extends B ? true : false) &
+    (B extends A ? true : false);
 
   type test1 = IsEqual<1, any>;
 
   type cases = [Expect<Equal<IsEqual<1, any>, true>>]; // NOTE: 自觉应该是false 因为 any 可以是任何类型，任何类型也都是 any，所以当这样写判断不出 any 类型来。
 
-  type IsEqual2<A, B> = (<T>() => T extends A ? 1 : 2) extends <T>() => T extends B ? 1 : 2 ? true : false;
+  type IsEqual2<A, B> = (<T>() => T extends A ? 1 : 2) extends <
+    T,
+  >() => T extends B ? 1 : 2
+    ? true
+    : false;
 
   type cases2 = [Expect<Equal<IsEqual2<1, any>, false>>]; // TODO: 这是因为 TS 对这种形式的类型做了特殊处理，是一种 hack 的写法，它的解释要从 TypeScript 源码找答案了
 }
 
 {
-  type IsUnion<A, B extends A = A> = A extends A ? ([B] extends [A] ? false : true) : never;
+  type IsUnion<A, B extends A = A> = A extends A
+    ? [B] extends [A]
+      ? false
+      : true
+    : never;
 
   type test1 = IsUnion<string | number>;
 }
@@ -56,11 +68,20 @@ import { Equal, Expect } from '@type-challenges/utils';
   type tupleLength = [1, 2]['length'];
   type arrayLength = number[]['length'];
 
-  type cases = [Expect<Equal<tupleLength, 2>>, Expect<Equal<arrayLength, number>>];
+  type cases = [
+    Expect<Equal<tupleLength, 2>>,
+    Expect<Equal<arrayLength, number>>,
+  ];
 
-  type NotEqual<A, B> = (<T>() => T extends A ? 1 : 2) extends <T>() => T extends B ? 1 : 2 ? false : true;
+  type NotEqual<A, B> = (<T>() => T extends A ? 1 : 2) extends <
+    T,
+  >() => T extends B ? 1 : 2
+    ? false
+    : true;
 
-  type isTuple<T> = T extends [...items: infer P] ? NotEqual<P['length'], number> : false;
+  type isTuple<T> = T extends [...items: infer P]
+    ? NotEqual<P['length'], number>
+    : false;
 
   type test1 = isTuple<[]>;
   type test2 = isTuple<number[]>;
@@ -75,7 +96,11 @@ import { Equal, Expect } from '@type-challenges/utils';
 // NOTE: 在 TypeScript 中有函数参数是有逆变的性质的，也就是如果参数可能是多个类型，参数类型会变成它们的交叉类型。
 // NOTE: 函数参数的逆变性质一般就联合类型转交叉类型会用，记住就行。
 {
-  type UnionToIntersection<U> = (U extends U ? (x: U) => unknown : never) extends (x: infer R) => unknown ? R : never;
+  type UnionToIntersection<U> = (
+    U extends U ? (x: U) => unknown : never
+  ) extends (x: infer R) => unknown
+    ? R
+    : never;
 
   type test1 = UnionToIntersection<{ a: 1 } | { b: 2 }>;
 
@@ -109,7 +134,9 @@ import { Equal, Expect } from '@type-challenges/utils';
     age?: number;
   };
 
-  type isRequest<Obj, Key extends keyof Obj> = {} extends Pick<Obj, Key> ? never : Key;
+  type isRequest<Obj, Key extends keyof Obj> = {} extends Pick<Obj, Key>
+    ? never
+    : Key;
 
   type GetRequired<Obj extends Record<string, any>> = {
     [Key in keyof Obj as isRequest<Obj, Key>]: Obj[Key];
@@ -173,7 +200,10 @@ import { Equal, Expect } from '@type-challenges/utils';
 
   type test2 = typeof arr;
 
-  type cases = [Expect<Equal<test1, { a: number; b: string }>>, Expect<Equal<test2, number[]>>];
+  type cases = [
+    Expect<Equal<test1, { a: number; b: string }>>,
+    Expect<Equal<test2, number[]>>,
+  ];
 }
 // 但是类型编程很多时候是需要推导出字面量类型的，这时候就需要用 as const：
 {
@@ -191,7 +221,10 @@ import { Equal, Expect } from '@type-challenges/utils';
 
   type test2 = typeof arr;
 
-  type cases = [Expect<Equal<test1, { readonly a: 1; readonly b: 'b' }>>, Expect<Equal<test2, readonly [1, 2, 3]>>];
+  type cases = [
+    Expect<Equal<test1, { readonly a: 1; readonly b: 'b' }>>,
+    Expect<Equal<test2, readonly [1, 2, 3]>>,
+  ];
 }
 
 // 学完前面 5 个套路，我们已经能够实现各种类型编程逻辑了，但一些类型的特性还是要记一下。在判断或者过滤类型的时候会用到：

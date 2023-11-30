@@ -6,7 +6,9 @@
 import { Equal, Expect } from '@type-challenges/utils';
 
 {
-  type UppercaseA<Item extends string> = Item extends 'a' ? Uppercase<Item> : Item;
+  type UppercaseA<Item extends string> = Item extends 'a'
+    ? Uppercase<Item>
+    : Item;
 
   type test1 = UppercaseA<'a' | 'b' | 'C'>;
 
@@ -27,15 +29,19 @@ import { Equal, Expect } from '@type-challenges/utils';
 
 // CamelcaseUnion
 {
-  type Camelcase<Str extends string> = Str extends `${infer Left}_${infer Right}${infer Rest}`
-    ? `${Left}${Uppercase<Right>}${Camelcase<Rest>}`
-    : Str;
+  type Camelcase<Str extends string> =
+    Str extends `${infer Left}_${infer Right}${infer Rest}`
+      ? `${Left}${Uppercase<Right>}${Camelcase<Rest>}`
+      : Str;
 
   type test = Camelcase<'one_two_three'>;
 
   type cases = [Expect<Equal<test, 'oneTwoThree'>>];
 
-  type CamelcaseArr<Arr extends unknown[]> = Arr extends [infer Left, ...infer Rest]
+  type CamelcaseArr<Arr extends unknown[]> = Arr extends [
+    infer Left,
+    ...infer Rest,
+  ]
     ? [Camelcase<Left & string>, ...CamelcaseArr<Rest>]
     : [];
 
@@ -47,9 +53,10 @@ import { Equal, Expect } from '@type-challenges/utils';
   // 不需要像数组类型那样需要递归提取每个元素做处理。
   // 确实简化了很多，好像都是优点？
   // 也不全是，其实这样处理也增加了一些认知成本，不信我们再来看个例子： IsUnion
-  type CamelcaseUnion<Item extends string> = Item extends `${infer Left}_${infer Right}${infer Rest}`
-    ? `${Left}${Uppercase<Right>}${CamelcaseUnion<Rest>}`
-    : Item;
+  type CamelcaseUnion<Item extends string> =
+    Item extends `${infer Left}_${infer Right}${infer Rest}`
+      ? `${Left}${Uppercase<Right>}${CamelcaseUnion<Rest>}`
+      : Item;
 
   type test3 = CamelcaseUnion<'aa_bb_cc' | 'bb_cc_dd'>;
 
@@ -58,7 +65,11 @@ import { Equal, Expect } from '@type-challenges/utils';
 
 // IsUnion
 {
-  type IsUnion<A, B extends A = A> = A extends A ? ([B] extends [A] ? false : true) : never;
+  type IsUnion<A, B extends A = A> = A extends A
+    ? [B] extends [A]
+      ? false
+      : true
+    : never;
 
   type test1 = IsUnion<1 | 2 | 3 | 4>;
   type test2 = IsUnion<[1 | 2 | 3]>;
@@ -110,7 +121,11 @@ import { Equal, Expect } from '@type-challenges/utils';
    *  type test1 = IsUnion<1 | 2 | 3 | 4>; // true
    * ```
    */
-  type IsUnion<A, B = A> = A extends A ? ([B] extends [A] ? false : true) : never;
+  type IsUnion<A, B = A> = A extends A
+    ? [B] extends [A]
+      ? false
+      : true
+    : never;
 }
 
 // BEM
@@ -131,7 +146,13 @@ import { Equal, Expect } from '@type-challenges/utils';
   // 可以看到，用好了联合类型，确实能简化类型编程逻辑。
   type cases = [
     Expect<
-      Equal<bemResult, 'guang__aaa--warning' | 'guang__aaa--success' | 'guang__bbb--warning' | 'guang__bbb--success'>
+      Equal<
+        bemResult,
+        | 'guang__aaa--warning'
+        | 'guang__aaa--success'
+        | 'guang__bbb--warning'
+        | 'guang__bbb--success'
+      >
     >,
   ];
 }
@@ -139,7 +160,11 @@ import { Equal, Expect } from '@type-challenges/utils';
 // AllCombinations
 // 希望传入 'A' | 'B' 的时候，能够返回所有的组合： 'A' | 'B' | 'BA' | 'AB'。
 {
-  type Combination<A extends string, B extends string> = A | B | `${A}${B}` | `${B}${A}`;
+  type Combination<A extends string, B extends string> =
+    | A
+    | B
+    | `${A}${B}`
+    | `${B}${A}`;
 
   type AllCombinations<A extends string, B extends string = A> = A extends A
     ? Combination<A, AllCombinations<Exclude<B, A>>>

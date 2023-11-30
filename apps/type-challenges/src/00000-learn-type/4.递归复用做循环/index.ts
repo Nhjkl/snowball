@@ -7,20 +7,28 @@ import { type } from 'os';
 {
   type ttt = Promise<Promise<Promise<string>>>;
 
-  type DeepPromiseValueType<P extends Promise<unknown>> = P extends Promise<infer ValueType>
+  type DeepPromiseValueType<P extends Promise<unknown>> = P extends Promise<
+    infer ValueType
+  >
     ? ValueType extends Promise<unknown>
       ? DeepPromiseValueType<ValueType>
       : ValueType
     : never;
 
   // 不再约束类型参数必须是 Promise，这样就可以少一层判断。
-  type DeepPromiseValueType2<P> = P extends Promise<infer ValueType> ? DeepPromiseValueType2<ValueType> : P;
+  type DeepPromiseValueType2<P> = P extends Promise<infer ValueType>
+    ? DeepPromiseValueType2<ValueType>
+    : P;
 
   type test1 = DeepPromiseValueType<ttt>;
   type test2 = DeepPromiseValueType2<ttt>;
   type test3 = DeepPromiseValueType2<string>;
 
-  type cases = [Expect<Equal<test1, string>>, Expect<Equal<test2, string>>, Expect<Equal<test3, string>>];
+  type cases = [
+    Expect<Equal<test1, string>>,
+    Expect<Equal<test2, string>>,
+    Expect<Equal<test3, string>>,
+  ];
 }
 
 // 数组类型的递归
@@ -33,21 +41,31 @@ import { type } from 'os';
   // [3, 4, 5, 2, 1]
   // [4, 5, 3, 2, 1]
   // [5, 4, 3, 2, 1]
-  type ReverseArr<Arr extends unknown[]> = Arr extends [infer First, ...infer Rest]
+  type ReverseArr<Arr extends unknown[]> = Arr extends [
+    infer First,
+    ...infer Rest,
+  ]
     ? [...ReverseArr<Rest>, First]
     : Arr;
   /* TODO: ReverseArr 最后一次被调用Rest = [], 所以该行Arr可以替换成[], 为什么不能替换成 never,
    因为上面表达式就会变成[...never, First], TypeScript提前结束，finally返回never
    */
 
-  type ReverseArr2<Arr extends unknown[]> = Arr extends [infer Left, ...infer Center, infer Right]
+  type ReverseArr2<Arr extends unknown[]> = Arr extends [
+    infer Left,
+    ...infer Center,
+    infer Right,
+  ]
     ? [Right, ...ReverseArr2<Center>, Left]
     : Arr;
 
   type test1 = ReverseArr<arr>;
   type test2 = ReverseArr2<arr>;
 
-  type cases = [Expect<Equal<test1, [5, 4, 3, 2, 1]>>, Expect<Equal<test1, test2>>];
+  type cases = [
+    Expect<Equal<test1, [5, 4, 3, 2, 1]>>,
+    Expect<Equal<test1, test2>>,
+  ];
 }
 
 // Includes
@@ -55,9 +73,13 @@ import { type } from 'os';
   type arr = [1, 2, 3, 4, 5];
   // 查找 [1, 2, 3, 4, 5] 中是否存在 4，是就返回 true，否则返回 false。
 
-  type IsEqual<A, B> = (A extends B ? true : false) & (B extends A ? true : false);
+  type IsEqual<A, B> = (A extends B ? true : false) &
+    (B extends A ? true : false);
 
-  type Includes<Arr extends unknown[], T> = Arr extends [infer First, ...infer Rest]
+  type Includes<Arr extends unknown[], T> = Arr extends [
+    infer First,
+    ...infer Rest,
+  ]
     ? IsEqual<First, T> extends false
       ? Includes<Rest, T>
       : true
@@ -71,9 +93,14 @@ import { type } from 'os';
 
 // RemoveItem
 {
-  type IsEqual<A, B> = (A extends B ? true : false) & (B extends A ? true : false);
+  type IsEqual<A, B> = (A extends B ? true : false) &
+    (B extends A ? true : false);
 
-  type RemoveItem<Arr extends unknown[], Item, Result extends unknown[] = []> = Arr extends [infer First, ...infer Rest]
+  type RemoveItem<
+    Arr extends unknown[],
+    Item,
+    Result extends unknown[] = [],
+  > = Arr extends [infer First, ...infer Rest]
     ? IsEqual<First, Item> extends true
       ? RemoveItem<Rest, Item, Result> // 如果 First === Item,则继续递归， Result = []
       : RemoveItem<Rest, Item, [...Result, First]> // 如果 First !== Item,则继续递归， Result = [...Result, First] 保留 First
@@ -86,9 +113,11 @@ import { type } from 'os';
 
 // BuildArray
 {
-  type BuildArray<Len extends number, Item, Arr extends unknown[] = []> = Arr['length'] extends Len
-    ? Arr
-    : BuildArray<Len, Item, [...Arr, Item]>;
+  type BuildArray<
+    Len extends number,
+    Item,
+    Arr extends unknown[] = [],
+  > = Arr['length'] extends Len ? Arr : BuildArray<Len, Item, [...Arr, Item]>;
 
   type test1 = BuildArray<3, 1>;
 
@@ -101,7 +130,9 @@ import { type } from 'os';
     Str extends string,
     From extends string,
     To extends string,
-  > = Str extends `${infer Left}${From}${infer Right}` ? `${Left}${To}${ReplaceAll<Right, From, To>}` : Str;
+  > = Str extends `${infer Left}${From}${infer Right}`
+    ? `${Left}${To}${ReplaceAll<Right, From, To>}`
+    : Str;
 
   type test1 = ReplaceAll<'goooooogle', 'o', '0'>;
 
@@ -110,9 +141,10 @@ import { type } from 'os';
 
 // StringToUnion
 {
-  type StringToUnion<Str extends string> = Str extends `${infer First}${infer Rest}`
-    ? First | StringToUnion<Rest>
-    : never;
+  type StringToUnion<Str extends string> =
+    Str extends `${infer First}${infer Rest}`
+      ? First | StringToUnion<Rest>
+      : never;
 
   type test1 = StringToUnion<'hello'>;
 }
@@ -125,7 +157,10 @@ import { type } from 'os';
   //   leh
   //  lleh
   // olleh
-  type ReverseStr<Str extends string, Result extends string = ''> = Str extends `${infer First}${infer Rest}`
+  type ReverseStr<
+    Str extends string,
+    Result extends string = '',
+  > = Str extends `${infer First}${infer Rest}`
     ? ReverseStr<Rest, `${First}${Result}`>
     : Result;
 

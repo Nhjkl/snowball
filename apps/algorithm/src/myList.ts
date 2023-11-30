@@ -22,13 +22,15 @@ export class MyList {
 
   /* 访问元素 */
   public get(index: number): number {
-    if (index < 0 || index >= this._size) throw new Error('Index out of bounds');
+    if (index < 0 || index >= this._size)
+      throw new Error('Index out of bounds');
     return this.arr[index];
   }
 
   /* 更新元素 */
   public set(index: number, num: number): void {
-    if (index < 0 || index >= this._size) throw new Error('Index out of bounds');
+    if (index < 0 || index >= this._size)
+      throw new Error('Index out of bounds');
     this.arr[index] = num;
   }
 
@@ -40,7 +42,8 @@ export class MyList {
 
   /* 中间插入元素 */
   public insert(index: number, num: number): void {
-    if (index < 0 || index >= this._size) throw new Error('Index out of bounds');
+    if (index < 0 || index >= this._size)
+      throw new Error('Index out of bounds');
 
     if (this._size === this._capacity) this.extendCapacity();
 
@@ -55,7 +58,8 @@ export class MyList {
 
   /* 删除元素 */
   public remove(index: number): number {
-    if (index < 0 || index >= this._size) throw new Error('Index out of bounds');
+    if (index < 0 || index >= this._size)
+      throw new Error('Index out of bounds');
 
     const num = this.arr[index];
 
@@ -71,7 +75,9 @@ export class MyList {
   /* 列表扩容 */
   public extendCapacity(): void {
     // 新建一个长度为 size 的数组，并将原数组拷贝到新数组
-    this.arr = this.arr.concat(new Array(this.capacity() * (this.extendRatio - 1)));
+    this.arr = this.arr.concat(
+      new Array(this.capacity() * (this.extendRatio - 1)),
+    );
     // 更新列表容量
     this._capacity = this.arr.length;
   }
