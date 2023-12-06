@@ -17,8 +17,12 @@ async function getQuestions() {
  * download 题目文件
  * @param [name='00004-easy-pick']
  */
-async function getQuestionFile(name: string = '00004-easy-pick', outputPath: string = 'src') {
-  const baseUrl = 'https://raw.githubusercontent.com/type-challenges/type-challenges/main/questions';
+async function getQuestionFile(
+  name: string = '00004-easy-pick',
+  outputPath: string = 'src',
+) {
+  const baseUrl =
+    'https://raw.githubusercontent.com/type-challenges/type-challenges/main/questions';
   const templateFile = `${baseUrl}/${name}/template.ts`;
   const testCasesFile = `${baseUrl}/${name}/test-cases.ts`;
 
