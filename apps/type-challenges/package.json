@@ -8,8 +8,7 @@
   "scripts": {
     "getQuestions": "esno ./getQuestions.ts",
     "selector": "./.selector",
-    "selector:temp": "./.selector temp",
-    "test": "esno ./src/04518-medium-fill/template.ts"
+    "selector:temp": "./.selector temp"
   },
   "dependencies": {
     "@snowball/tsconfig": "workspace:^",
