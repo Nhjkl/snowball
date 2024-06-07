@@ -1,4 +1,4 @@
-N:00002-medium-return-type
+Y:00002-medium-return-type
 Y:00003-medium-omit
 Y:00004-easy-pick
 N:00005-extreme-readonly-keys
@@ -57,7 +57,7 @@ N:00545-hard-printf
 N:00553-hard-deep-object-to-unique
 N:00599-medium-merge
 N:00612-medium-kebabcase
-N:00645-medium-diff
+Y:00645-medium-diff
 N:00651-hard-length-of-string-2
 N:00697-extreme-tag
 N:00730-hard-union-to-tuple
@@ -168,3 +168,11 @@ N:29785-medium-deep-omit
 N:30301-medium-isodd
 N:30430-medium-tower-of-hanoi
 N:30575-hard-bitwisexor
+N:30958-medium-pascals-triangle
+N:30970-medium-shitariteraru
+N:31447-extreme-countreversepairs
+N:31797-hard-sudoku
+N:31824-hard-length-of-string-3
+N:31997-extreme-parameter-intersection
+N:32427-hard-unbox
+N:32532-hard-binary-addition

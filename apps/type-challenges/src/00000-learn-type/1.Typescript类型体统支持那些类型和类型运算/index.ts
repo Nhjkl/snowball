@@ -132,6 +132,12 @@ const transpiler = Transpiler.TypeScriptCompiler;
   type res = First<[1, 2, 3]>;
 
   type cases = [Expect<Equal<1, res>>];
+
+  type End<T extends unknown[]> = T extends [...infer R, infer E] ? E : never;
+
+  type res1 = End<[1, 2, 3]>;
+
+  type cases1 = [Expect<Equal<3, res1>>];
 }
 
 // 注意，第一个 extends 不是条件，条件类型是 extends ? :，这里的 extends 是约束的意思，也就是约束类型参数只能是数组类型。
@@ -153,6 +159,10 @@ const transpiler = Transpiler.TypeScriptCompiler;
   const obj: ObjType = { a: 1, c: true };
 
   type res = { a: number; c: boolean } extends ObjType ? true : false;
+
+  type t1 = 1 | 2;
+  type t2 = 1 | 4;
+  type t3 = t1 & t2;
 
   type cases = [
     Expect<Equal<res, true>>,

@@ -6,15 +6,58 @@ _selected_option=$(printf "%s\n" "${options[@]}" | fzf)
 selected_option="${_selected_option/N:/}"
 selected_option="${selected_option/Y:/}"
 
+# 定义函数 getQuestionFile
+getQuestionFile() {
+	local name=${1:-"00004-easy-pick"} # 默认参数
+	local outputPath=${2:-"src"}       # 默认参数
+
+	local baseUrl="https://raw.githubusercontent.com/type-challenges/type-challenges/main/questions"
+	local templateFile="${baseUrl}/${name}/template.ts"
+	local testCasesFile="${baseUrl}/${name}/test-cases.ts"
+	local templatePath="./${outputPath}/${name}/template.ts"
+	local testCasesPath="./${outputPath}/${name}/test-cases.ts"
+
+	# 检查文件是否存在的函数
+	isExist() {
+		if curl -s --head --request GET "$1" | grep "200 OK" >/dev/null; then
+			return 0
+		else
+			return 1
+		fi
+	}
+
+	# 从 GitHub 请求文件的函数
+	githubRequest() {
+		curl -s "$1"
+	}
+
+	# 创建输出目录
+	mkdir -p "$outputPath/$name"
+
+	# 下载 template.ts 文件
+	if ! isExist "$templateFile"; then
+		echo "Downloading template file..."
+		githubRequest "$templateFile" >"$templatePath"
+	fi
+
+	# 下载 test-cases.ts 文件
+	if ! isExist "$testCasesFile"; then
+		echo "Downloading test cases file..."
+		githubRequest "$testCasesFile" >"$testCasesPath"
+	fi
+}
+
 if [[ " ${options[@]} " =~ " ${_selected_option} " ]]; then
-	//https://github.com/type-challenges/type-challenges/blob/main/questions/00004-easy-pick/README.zh-CN.md
+	# //https://github.com/type-challenges/type-challenges/blob/main/questions/00004-easy-pick/README.zh-CN.md
 	$BROWSER https://github.com/type-challenges/type-challenges/blob/main/questions/$selected_option/README.zh-CN.md &
 
 	# 判断参数是否为空
 	if [ -z "$1" ]; then
-		esno ./getQuestions.ts $selected_option
+		# esno ./getQuestions.ts $selected_option
+		getQuestionFile $selected_option
 	else
-		esno ./getQuestions.ts $selected_option $1
+		getQuestionFile $selected_option $1
+		# esno ./getQuestions.ts $selected_option $1
 	fi
 else
 	echo "Selected option does not exist in the file: ${selected_option}"
