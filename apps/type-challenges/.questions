@@ -115,7 +115,7 @@ N:05117-medium-without
 N:05140-medium-trunc
 N:05153-medium-indexof
 N:05181-hard-mutable-keys
-N:05310-medium-join
+Y:05310-medium-join
 N:05317-medium-lastindexof
 N:05360-medium-unique
 N:05423-hard-intersection

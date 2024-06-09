@@ -215,6 +215,8 @@ const transpiler = Transpiler.TypeScriptCompiler;
     __a__: 1,
     __b__: 2,
   };
+
+  type s = `s`;
 }
 
 // 这里的 & string 可能大家会迷惑，解释一下：
