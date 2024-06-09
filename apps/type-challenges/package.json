@@ -14,5 +14,8 @@
     "@snowball/tsconfig": "workspace:^",
     "@snowball/utils": "workspace:^",
     "@type-challenges/utils": "^0.1.1"
+  },
+  "devDependencies": {
+    "vitest": "^0.34.6"
   }
 }

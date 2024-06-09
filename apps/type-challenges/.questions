@@ -55,7 +55,7 @@ N:00531-medium-string-to-union
 Y:00533-easy-concat
 N:00545-hard-printf
 N:00553-hard-deep-object-to-unique
-N:00599-medium-merge
+Y:00599-medium-merge
 N:00612-medium-kebabcase
 Y:00645-medium-diff
 N:00651-hard-length-of-string-2
@@ -93,7 +93,7 @@ N:02946-medium-objectentries
 N:02949-hard-objectfromentries
 Y:03057-easy-push
 Y:03060-easy-unshift
-N:03062-medium-shift
+Y:03062-medium-shift
 N:03188-medium-tuple-to-nested-object
 N:03192-medium-reverse
 N:03196-medium-flip-arguments
