@@ -43,5 +43,5 @@ test('逆变(contravariant),', () => {
 
   printHobbies = printName;
 
-  printName = printHobbies;
+  // printName = printHobbies;
 });
